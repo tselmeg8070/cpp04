@@ -1,11 +1,19 @@
-NAME = claptrap
+NAME = run
 CC = g++
 FLAGS = -Wall -Wextra -Werror
 VFLAGS = -std=c++98 -fsanitize=address
-FILES = ClapTrap \
+FILES = Animal \
+		Dog \
+		Cat \
+		WrongAnimal \
+		WrongCat \
 		main
 
-INCLS = ClapTrap.hpp
+INCLS = Animal.hpp \
+		Dog.hpp \
+		WrongCat.hpp \
+		WrongAnimal.hpp \
+		Cat.hpp
 
 SRCS = $(addsuffix .cpp, $(FILES))
 OBJS = $(addsuffix .o, $(FILES))
