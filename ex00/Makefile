@@ -1,13 +1,14 @@
 NAME = run
-CC = g++
-FLAGS = -Wall -Wextra -Werror
-VFLAGS = -std=c++98 -fsanitize=address
-FILES = Animal \
-		Dog \
-		Cat \
-		WrongAnimal \
-		WrongCat \
-		main
+CXX = c++
+CFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -std=c++98
+
+SRCS = 	Animal.cpp \
+		Dog.cpp \
+		Cat.cpp \
+		WrongAnimal.cpp \
+		WrongCat.cpp \
+		main.cpp
 
 INCLS = Animal.hpp \
 		Dog.hpp \
@@ -15,16 +16,15 @@ INCLS = Animal.hpp \
 		WrongAnimal.hpp \
 		Cat.hpp
 
-SRCS = $(addsuffix .cpp, $(FILES))
-OBJS = $(addsuffix .o, $(FILES))
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(VFLAGS) -o $(NAME) $^
+	$(CXX) $(VFLAGS) -o $(NAME) $^
 
-.cpp.o: $(SRCS) $(INCLS)
-	$(CC) $(FLAGS) $(VFLAGS) -c -o $@ $<
+%.o : %.cpp $(INCLS)
+	$(CXX) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
